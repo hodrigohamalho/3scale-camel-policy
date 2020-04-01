@@ -1,0 +1,24 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: 3scale-camel-policy
+  labels:
+    app: 3scale-camel-policy
+    group: com.redhat.integration
+    provider: fabric8
+    version: 1.0-SNAPSHOT
+  annotations:
+    prometheus.io/port: '9779'
+    prometheus.io/scrape: 'true'
+spec:
+  ports:
+    - name: proxy
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+  selector:
+    app: 3scale-camel-policy
+    group: com.redhat.integration
+    provider: fabric8
+  sessionAffinity: None
+  type: ClusterIP
